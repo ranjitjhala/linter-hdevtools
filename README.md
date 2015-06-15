@@ -2,7 +2,8 @@
 
 This package will lint your opened Haskell in Atom, using [hdevtools](https://hackage.haskell.org/package/hdevtools)
 
-![linter-hdevtools in action](screenshot.png)
+![linter-hdevtools in action](https://raw.githubusercontent.com/ranjitjhala/linter-hdevtools/master/screenshot.png)
+
 
 ## Installation
 
