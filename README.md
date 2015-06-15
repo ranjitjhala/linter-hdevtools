@@ -12,3 +12,8 @@ This package will lint your opened Haskell in Atom, using [hdevtools](https://ha
 * `$ apm install language-haskell` (for [Haskell syntax highlighting](https://github.com/jroesch/language-haskell) installed).
 * `$ apm install linter-hdevtools`
 * specify the path to `hdevtools` in the settings.  You can find the path by using `which hdevtools` in the terminal
+
+## TODO 
+
+* Somehow get either `warnings` or `error` but not both. Is this `hdevtools` at work? Or some issue with the regexp?
+
