@@ -8,7 +8,7 @@ class LinterHdevtools extends Linter
 
   # A string, list, tuple or callable that returns a string, list or tuple,
   # containing the command line (with arguments) used to lint.
-  cmd: ['hdevtools', 'check', '-g', '-Wall']
+  cmd: ['hdevtools', 'check']
 
   linterName: 'hdevtools'
 
