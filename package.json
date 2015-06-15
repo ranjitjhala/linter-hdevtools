@@ -2,7 +2,7 @@
   "name": "linter-hdevtools",
   "linter-package": true,
   "main": "./lib/init",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Lint haskell code with hdevtools",
   "repository": "https://github.com/ranjitjhala/linter-hdevtools",
   "license": "MIT",
