@@ -8,7 +8,7 @@ class LinterHdevtools extends Linter
 
   # A string, list, tuple or callable that returns a string, list or tuple,
   # containing the command line (with arguments) used to lint.
-  cmd: ['hdevtools', 'check'] # TODO: [ '-g', '-Wall']
+  cmd: ['hdevtools', 'check', '-g', '-Wall']
 
   linterName: 'hdevtools'
 
@@ -16,8 +16,6 @@ class LinterHdevtools extends Linter
          (?<message>(\\s+.*\\n)+)'
 
   # regexFlags: 'gms'
-
-
   # regex: '.+?:(?<line>\\d+):(?<col>\\d+):\\s+((?<warning>Warning:)|(?<error>))\\s*\
   #         (?<message>.*)'
 
@@ -29,9 +27,6 @@ class LinterHdevtools extends Linter
     @disposables.add atom.config.observe 'linter-hdevtools.hdevtoolsExecutablePath', @formatShellCmd
 
     filePath = editor?.buffer.file?.path
-
-    # console.log("CWD: " + @cwd)
-    # console.log("FILEPATH: " + filePath)
 
     @cmd = @cmd.concat ['-p', filePath]
 
@@ -47,8 +42,6 @@ class LinterHdevtools extends Linter
       warn "Regex does not match lint output", match
 
     "\n   " + "#{match.message}"
-
-####    "#{match.message} (#{match.type}#{match.code})"
 
   destroy: ->
     super
