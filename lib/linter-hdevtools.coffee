@@ -8,16 +8,18 @@ class LinterHdevtools extends Linter
 
   # A string, list, tuple or callable that returns a string, list or tuple,
   # containing the command line (with arguments) used to lint.
-  cmd: ['hdevtools', 'check']
+  cmd: ['hdevtools', 'check'] # TODO: [ '-g', '-Wall']
 
   linterName: 'hdevtools'
 
   regex: '.+?:(?<line>\\d+):(?<col>\\d+):\\s+((?<warning>Warning:)|(?<error>))\\s*\
-          (?<message>.*)'
+         (?<message>(\\s+.*\\n)+)'
 
-  # regex: '.+?:(?<line>\\d+):(?<col>\\d+):\\s+\
-  #        ((?<error>)|(?<warning>Warning:))\\s*\
-  #        (?<message>.*)'
+  # regexFlags: 'gms'
+
+
+  # regex: '.+?:(?<line>\\d+):(?<col>\\d+):\\s+((?<warning>Warning:)|(?<error>))\\s*\
+  #         (?<message>.*)'
 
   constructor: (editor) ->
     super(editor)
@@ -25,6 +27,13 @@ class LinterHdevtools extends Linter
     @disposables = new CompositeDisposable
 
     @disposables.add atom.config.observe 'linter-hdevtools.hdevtoolsExecutablePath', @formatShellCmd
+
+    filePath = editor?.buffer.file?.path
+
+    # console.log("CWD: " + @cwd)
+    # console.log("FILEPATH: " + filePath)
+
+    @cmd = @cmd.concat ['-p', filePath]
 
   lintFile: (filePath, callback) ->
     super(filePath, callback)
@@ -34,10 +43,10 @@ class LinterHdevtools extends Linter
     @executablePath = "#{hdevtoolsExecutablePath}"
 
   formatMessage: (match) ->
-    unless match.type
+    unless (match.message)
       warn "Regex does not match lint output", match
 
-    "#{match.message}"
+    "\n   " + "#{match.message}"
 
 ####    "#{match.message} (#{match.type}#{match.code})"
 
