@@ -6,7 +6,7 @@
   "repository": "https://github.com/ranjitjhala/linter-hdevtools",
   "license": "MIT",
   "engines": {
-    "atom": ">1.0"
+    "atom": ">=1.0"
   },
   "dependencies": {},
   "providedServices": {
