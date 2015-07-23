@@ -8,7 +8,11 @@
   "engines": {
     "atom": ">=1.0"
   },
-  "dependencies": {},
+
+  "dependencies": {
+    "xregexp": ">=2.0.0"
+  },
+
   "providedServices": {
     "linter": {
       "versions": {
