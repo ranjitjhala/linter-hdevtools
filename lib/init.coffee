@@ -41,11 +41,6 @@ module.exports =
       type: 'string'
       default: 'hdevtools'
 
-    # hdevtoolsSocketPath:
-    #  title: 'The path to hdevtools socket file'
-    #  type: 'string'
-    #  default: '.hdevtools-socket-atom-lint'
-
   activate: ->
     @socketPath = getUserHome() + '/.hdevtools-socket-atom-lint'
     @subscriptions = new CompositeDisposable
