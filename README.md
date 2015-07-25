@@ -17,4 +17,4 @@ This package will lint your opened Haskell in Atom, using [hdevtools](https://ha
 
 Since the plugin needs to run `hdevtools` you must either have it in your path, or provide the full 
 path as described above. The latter is recommended especially if you run `atom` from outside a shell 
-(e.g. by the result of "spotlight search" on MacOS), or you may see issues [like this](issues/3)
+(e.g. by the result of "spotlight search" on MacOS), or you may see issues [like this](/issues/3)
