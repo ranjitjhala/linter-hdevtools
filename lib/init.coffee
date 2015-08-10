@@ -36,14 +36,21 @@ getUserHome = () ->
 
 module.exports =
   config:
+    hdevtoolsSocketPath:
+      title: 'The hdevtools socket path.'
+      type: 'string'
+      default: getUserHome() + '/.hdevtools-socket-atom-lint'
+
     hdevtoolsExecutablePath:
       title: 'The hdevtools executable path.'
       type: 'string'
       default: 'hdevtools'
 
   activate: ->
-    @socketPath = getUserHome() + '/.hdevtools-socket-atom-lint'
     @subscriptions = new CompositeDisposable
+    @subscriptions.add atom.config.observe 'linter-hdevtools.hdevtoolsSocketPath',
+      (socketPath) =>
+        @socketPath = socketPath
     @subscriptions.add atom.config.observe 'linter-hdevtools.hdevtoolsExecutablePath',
       (executablePath) =>
         @executablePath = executablePath
@@ -77,7 +84,7 @@ module.exports =
               message.push data
             exit: (code) ->
               # return resolve [] unless code is 0
-              info = message.join('\n')
+              info = message.join('\n').replace(/[\r]/g, '');
               return resolve [] unless info?
               resolve infoErrors(filePath, info)
 
