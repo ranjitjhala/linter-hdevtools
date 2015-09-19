@@ -7,13 +7,27 @@ hdRegex = '.+?:(?<line>\\d+):(?<col>\\d+):\\s+((?<warning>Warning:)|(?<error>))\
 
 hdRegexFlags = ''
 
+trimMessage = (str) ->
+  lines  = str.split('\n')
+  tlines = lines.map (l) -> l.trim()
+  return tlines.join('\n')
+
 matchError = (fp, match) ->
   line = Number(match.line) - 1
   col  = Number(match.col) - 1
+  flib = ["cat", "dog", "mouse"]
+  tmsg = trimMessage(match.message)
+  console.log("trim message:" + tmsg)
   type: if match.warning then 'Warning' else 'Error',
-  text: match.message,
+  text: tmsg, #match.message,
+  # html: "<b>Hello</b><br><b>You Fool</b><br><i>Joyride</i>",
   filePath: fp,
+  multiline: true,
   range: [ [line, col], [line, col + 1] ]
+  ## trace: flib.map (text) ->
+                  ## type: ''
+                  ## text: text
+                  ## multiline: true
 
 infoErrors = (fp, info) ->
   # console.log ("begin:" + info + ':end')
@@ -24,7 +38,7 @@ infoErrors = (fp, info) ->
   for msg in info.split(/\r?\n\r?\n/)
     XRegExp.forEach msg, regex, (match, i) ->
       e = matchError(fp, match)
-      # console.log('error:', e)
+      console.log('error:', e)
       errors.push(e)
   return errors
 

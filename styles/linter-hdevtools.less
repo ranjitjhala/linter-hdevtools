@@ -3,9 +3,54 @@
 // See https://github.com/atom/atom-dark-ui/blob/master/styles/ui-variables.less
 // for a full listing of what's available.
 @import "ui-variables";
+@spacing: 3px;
 
 #linter-inline {
    white-space: pre !important;
+}
+
+.linter-message-item {
+  margin-left: @spacing;
+  margin-bottom: initial;
+}
+
+linter-message {
+  font-size: @font-size;
+  line-height: 1.6;
+}
+
+linter-multiline-message {
+  display: block;
+  pointer-events: auto;
+
+  linter-message-line {
+    display: block;
+    white-space: pre;
+  }
+  linter-message-line:not(:first-child) {
+    display: block;
+    white-space: pre;
+    // RJ display: none;
+    // RJ margin-left: 1.1em;
+  }
+  linter-message-line:first-child:not(:nth-last-of-type(1))::before {
+    display: none;
+    // RJ font-family: 'Octicons Regular';
+    // RJ content: @triangle-right;
+    // RJ display: inline-block;
+    // RJ width: 1em;
+    // RJ margin-right: 0.1em;
+    // RJ text-align: center;
+    // RJ height: 1em;
+  }
+  // &:focus, &.expanded {
+    // linter-message-line:first-child:not(:nth-last-of-type(1))::before {
+      // content: @triangle-down;
+    // }
+    // linter-message-line:not(:first-child) {
+      // display: block;
+    // }
+  // }
 }
 
 // atom-text-editor::shadow .linter-highlight, .linter-highlight{
