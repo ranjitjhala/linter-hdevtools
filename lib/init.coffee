@@ -17,10 +17,9 @@ matchError = (fp, match) ->
   col  = Number(match.col) - 1
   flib = ["cat", "dog", "mouse"]
   tmsg = trimMessage(match.message)
-  console.log("trim message:" + tmsg)
+  # console.log("trim message:" + tmsg)
   type: if match.warning then 'Warning' else 'Error',
   text: tmsg, #match.message,
-  # html: "<b>Hello</b><br><b>You Fool</b><br><i>Joyride</i>",
   filePath: fp,
   multiline: true,
   range: [ [line, col], [line, col + 1] ]
@@ -38,7 +37,7 @@ infoErrors = (fp, info) ->
   for msg in info.split(/\r?\n\r?\n/)
     XRegExp.forEach msg, regex, (match, i) ->
       e = matchError(fp, match)
-      console.log('error:', e)
+      # console.log('error:', e)
       errors.push(e)
   return errors
 
