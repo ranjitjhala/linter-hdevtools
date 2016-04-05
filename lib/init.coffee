@@ -88,7 +88,7 @@ module.exports =
           # console.log ("path: " + textEditor.getPath())
           # console.log ("zog : " + getUserHome())
           command = @executablePath
-          args = [ "check", "-s" , @socketPath , "-g" , "-Wall" , filePath ]
+          args = [ "check", "-s" , @socketPath , "-g" , "-Wall", "-g", "-Werror", filePath ]
           if @useStack
             command = "stack"
             args = [ "exec", "--no-ghc-package-path", "hdevtools", "--" ].concat(args)
