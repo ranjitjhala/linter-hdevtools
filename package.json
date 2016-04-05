@@ -9,7 +9,7 @@
     "atom": ">=1.0"
   },
   "dependencies": {
-    "xregexp": "2.0.0"
+    "xregexp": ">=2.0.0 && <=3.0.0"
   },
   "providedServices": {
     "linter": {
