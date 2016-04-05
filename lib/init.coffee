@@ -2,7 +2,11 @@
 {XRegExp}   = require "xregexp"
 {Process}   = require "process"
 
-hdRegex = ".+?:(?<line>\\d+):(?<col>\\d+):\\s+((?<warning>Warning:)|(?<error>))\\s*\
+## THIS WORKS!
+## hdRegex = ".+?:(?<line>\\d+):(?<col>\\d+):\\s+((?<warning>Warning:)|(?<error>))\\s*\
+##          (?<message>(\\s+.*\\n)+)"
+
+hdRegex = ".+?:(?<line>\\d+):(?<col>\\d+):((?<warning>\\s+Warning:)|(?<error>))\
           (?<message>(\\s+.*\\n)+)"
 
 hdRegexFlags = ""
