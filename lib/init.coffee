@@ -46,6 +46,10 @@ getUserHome = () ->
   # console.log(p, v)
   process.env[v]
 
+projectFolder = (filePath) ->
+  folderPaths = atom.project.getPaths()
+  folderPaths.find (p) -> filePath.indexOf(p) >= 0
+
 module.exports =
   config:
     hdevtoolsSocketPath:
@@ -87,12 +91,15 @@ module.exports =
       lint: (textEditor) =>
         return new Promise (resolve, reject) =>
           filePath = textEditor.getPath()
+          folder = projectFolder(filePath)
+          relativePath = filePath.replace(folder + "/", "")
           message  = []
           # console.log ("exec: " + @executablePath)
           # console.log ("path: " + textEditor.getPath())
           # console.log ("zog : " + getUserHome())
           command = @executablePath
-          args = [ "check", "-s" , @socketPath , "-g" , "-Wall", "-g", "-Werror", filePath ]
+          args = [ "check", "-s" , @socketPath , "-g" , "-Wall", "-g", "-Werror", relativePath ]
+          options = {cwd: folder}
           if @useStack
             command = "stack"
             args = [ "exec", "--no-ghc-package-path", "hdevtools", "--" ].concat(args)
@@ -100,6 +107,7 @@ module.exports =
           process = new BufferedProcess
             command: command
             args: args
+            options: options
             stderr: (data) ->
               message.push data
             stdout: (data) ->
